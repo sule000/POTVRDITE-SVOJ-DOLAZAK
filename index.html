@@ -1,53 +1,33 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8">
-  <title>Potvrda dolaska - Amila & Sulejman</title>
+  <meta charset="UTF-8" />
+  <title>Potvrda dolaska – Amila & Sulejman</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f4f0;
-      text-align: center;
-      padding: 50px;
-    }
-    .form-container {
-      background-color: white;
-      border-radius: 12px;
-      padding: 30px;
-      max-width: 400px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    input[type="text"] {
-      padding: 10px;
-      margin: 10px 0;
-      width: 90%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #6a9c89;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button.no {
-      background-color: #c94c4c;
-    }
+    body{font-family:Arial, sans-serif;background:#f8f4f0;text-align:center;padding:50px}
+    .box{background:#fff;border-radius:12px;padding:30px;max-width:400px;margin:auto;box-shadow:0 0 10px rgba(0,0,0,.1)}
+    input[type=text]{padding:10px;margin:10px 0;width:90%;border:1px solid #ccc;border-radius:5px}
+    button{padding:10px 20px;margin:10px;border:0;border-radius:5px;background:#6a9c89;color:#fff;font-size:16px;cursor:pointer}
+    button.no{background:#c94c4c}
   </style>
 </head>
 <body>
-  <div class="form-container">
+  <div class="box">
     <h2>Potvrda dolaska</h2>
-    <p>Molimo unesite ime i prezime i potvrdite svoj dolazak na vjenčanje Amile i Sulejmana:</p>
-    <form action="https://formspree.io/f/mrbkbqyk" method="POST">
-      <input type="text" name="ime_prezime" placeholder="Ime i prezime" required><br>
-      <button type="submit" name="odgovor" value="Dolazim">Dolazim</button>
-      <button type="submit" name="odgovor" value="Ne mogu doći" class="no">Ne mogu doći</button>
+    <p>Unesite ime i prezime, pa odaberite da li dolazite:</p>
+
+    <!-- 1) Gosti koji DOLAZE: prebacujemo ih na drugu stranicu -->
+    <form id="form-da" action="pratnja.html" method="GET">
+      <input type="text" name="ime_prezime" placeholder="Ime i prezime" required>
+      <input type="hidden" name="odgovor" value="Dolazim">
+      <button type="submit">Dolazim</button>
+    </form>
+
+    <!-- 2) Gosti koji NE DOLAZE: odmah šaljemo Formspree-u -->
+    <form id="form-ne" action="https://formspree.io/f/mrbkbqyk" method="POST">
+      <input type="text" name="ime_prezime" placeholder="Ime i prezime" required>
+      <input type="hidden" name="odgovor" value="Ne mogu doći">
+      <button type="submit" class="no">Ne mogu doći</button>
     </form>
   </div>
 </body>
