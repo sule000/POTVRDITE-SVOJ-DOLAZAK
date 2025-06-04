@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pratnja – Amila & Sulejman</title>
+  <style>
+    body{font-family:Arial, sans-serif;background:#f8f4f0;text-align:center;padding:50px}
+    .box{background:#fff;border-radius:12px;padding:30px;max-width:400px;margin:auto;box-shadow:0 0 10px rgba(0,0,0,.1)}
+    input,select,button{padding:10px;margin:10px 0;width:90%;border:1px solid #ccc;border-radius:5px;font-size:15px}
+    button{width:auto;border:0;background:#6a9c89;color:#fff;cursor:pointer}
+    .hidden{display:none}
+  </style>
+  <script>
+    // Kad se stranica učita – popuni ime iz query-stringa
+    window.addEventListener('DOMContentLoaded',()=>{
+      const params=new URLSearchParams(window.location.search);
+      const ime=params.get('ime_prezime')||'';
+      document.getElementById('ime').value=ime;
+      // Pokaži/skrivaj polje za ime pratnje
+      const select=document.getElementById('pratnja');
+      const field=document.getElementById('pratnja-ime-box');
+      select.addEventListener('change',()=>field.classList.toggle('hidden',select.value!=='Da'));
+    });
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h2>Pratnja</h2>
+    <p>Hoćete li povesti pratnju?</p>
+    <form action="https://formspree.io/f/mrbkbqyk" method="POST">
+      <!-- Ime gosta – iz prvog koraka -->
+      <input type="text" id="ime" name="ime_prezime" readonly>
+
+      <!-- Odgovor gost dolazi -->
+      <input type="hidden" name="odgovor" value="Dolazim">
+
+      <!-- Pitanje o pratnji -->
+      <select id="pratnja" name="pratnja" required>
+        <option value="">-- odaberite --</option>
+        <option value="Ne">Ne, dolazim sam/sama</option>
+        <option value="Da">Da, dovodim pratnju</option>
+      </select>
+
+      <!-- Ako je “Da”, unesite ime pratnje -->
+      <div id="pratnja-ime-box" class="hidden">
+        <input type="text" name="ime_pratnje" placeholder="Ime i prezime pratnje">
+      </div>
+
+      <button type="submit">Pošalji potvrdu</button>
+    </form>
+  </div>
+</body>
+</html>
